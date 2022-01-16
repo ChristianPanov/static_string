@@ -1,11 +1,21 @@
 #pragma once
 
-#include <iostream>
+#include <array>
 
-class static_string
+namespace cts
 {
-public:
-	static_string() { std::cout << "static_string\n"; }
-};
+	template<std::size_t Size>
+	class basic_static_string
+	{
+	public:
+		constexpr basic_static_string() = default;
+		template<std::size_t N>
+		constexpr basic_static_string(const char(&arr)[N]);
+
+	private:
+		std::size_t m_elems{};
+		std::array<char, Size + 1> m_buffer{};
+	};
+}
 
 #include "static_string_impl.h"
