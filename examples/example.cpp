@@ -4,7 +4,11 @@
 
 int main()
 {
+	constexpr std::array<char, 7> arr = { "World!" };
+
 	constexpr cts::basic_static_string<6> str = "Hello";
+	constexpr cts::basic_static_string<7> str2 = arr;
+	constexpr cts::basic_static_string<7> str3 = str2;
 
 	return 0;
 }
