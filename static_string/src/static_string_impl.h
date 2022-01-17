@@ -48,4 +48,16 @@ namespace cts
 	{
 		return m_buffer;
 	}
+
+	template<std::size_t Size>
+	constexpr char& basic_static_string<Size>::operator[](std::size_t index)
+	{
+		return m_buffer[index];
+	}
+
+	template<std::size_t Size>
+	constexpr const char& basic_static_string<Size>::operator[](std::size_t index) const
+	{
+		return m_buffer[index];
+	}
 }

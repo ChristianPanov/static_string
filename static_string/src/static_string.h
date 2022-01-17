@@ -22,6 +22,10 @@ namespace cts
 		constexpr std::size_t length() const;
 		constexpr std::array<char, Size + 1> data() const;
 
+	public:
+		constexpr char& operator[](std::size_t index);
+		constexpr const char& operator[](std::size_t index) const;
+
 
 	private:
 		std::size_t m_elems{};

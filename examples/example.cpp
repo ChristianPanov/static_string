@@ -11,7 +11,8 @@ int main()
 	constexpr cts::basic_static_string<7> str3 = str2;
 
 	static_assert(!str.empty());
-	static_assert(str3.size() == 6);
+	static_assert(str.size() == 5);
+	static_assert(str[2] == 'l');
 
 	return 0;
 }
