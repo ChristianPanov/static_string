@@ -6,9 +6,9 @@ int main()
 {
 	constexpr std::array<char, 7> arr = { "World!" };
 
-	constexpr cts::basic_static_string<char, 6> str = "Hello";
-	constexpr cts::basic_static_string<char, 7> str2 = arr;
-	constexpr cts::basic_static_string<char, 7> str3 = str2;
+	constexpr cts::basic_static_string str = "Hello";
+	constexpr cts::basic_static_string str2 = arr;
+	constexpr cts::basic_static_string str3 = str2;
 
 	static_assert(!str.empty());
 	static_assert(str.size() == 5);
