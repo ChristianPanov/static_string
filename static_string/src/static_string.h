@@ -7,9 +7,6 @@ namespace cts
 	template<typename CharT, std::size_t Size>
 	class basic_static_string
 	{
-		template<typename CharT, std::size_t Size>
-		friend class basic_static_string;
-
 	public:
 		constexpr basic_static_string() = default;
 		constexpr basic_static_string(const CharT(&arr)[Size]);
@@ -35,10 +32,19 @@ namespace cts
 		constexpr bool operator!=(const basic_static_string<CharT, OtherSize>& other) const;
 		constexpr operator const CharT* () const;
 
-	protected:
+	public:
+		template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
+		friend constexpr basic_static_string<CharT, LeftSize - 1 + RightSize> operator+(
+			const basic_static_string<CharT, LeftSize>& lhs, const basic_static_string<CharT, RightSize>& rhs);
+
+	private:
 		std::size_t m_elems{};
 		std::array<char, Size> m_buffer{};
 	};
+
+	template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
+	constexpr basic_static_string<CharT, LeftSize - 1 + RightSize> operator+(
+		const basic_static_string<CharT, LeftSize>& lhs, const basic_static_string<CharT, RightSize>& rhs);
 }
 
 #include "static_string_impl.h"

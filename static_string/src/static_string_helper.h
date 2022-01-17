@@ -28,6 +28,20 @@ namespace cts::_helper
 		return to_std_array_impl<CharT, Size>(arr, std::make_index_sequence<Size - 1>());
 	}
 
+	template<typename CharT, std::size_t LeftSize, std::size_t RightSize, std::size_t... Idx>
+	constexpr bool are_equal_impl(const std::array<CharT, LeftSize>& lhs, const std::array<CharT, RightSize>& rhs,
+		std::index_sequence<Idx...>)
+	{
+		return ((lhs[Idx] == rhs[Idx]) && ...);
+	}
+
+	template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
+	constexpr bool are_equal(const std::array<CharT, LeftSize>& lhs, const std::array<CharT, RightSize>& rhs)
+	{
+		constexpr std::size_t min_size = std::min(LeftSize, RightSize);
+		return are_equal_impl(lhs, rhs, std::make_index_sequence<min_size - 1>());
+	}
+
 	template<typename CharT, std::size_t NewSize, std::size_t OldSize, std::size_t... Idx>
 	constexpr std::array<CharT, NewSize> resize_impl(const std::array<CharT, OldSize>& arr,
 		std::index_sequence<Idx...>)
@@ -41,17 +55,19 @@ namespace cts::_helper
 		return resize_impl<CharT, NewSize>(arr, std::make_index_sequence<NewSize - 1>());
 	}
 
-	template<typename CharT, std::size_t LeftSize, std::size_t RightSize, std::size_t... Idx>
-	constexpr bool are_equal_impl(const std::array<CharT, LeftSize>& lhs, const std::array<CharT, RightSize>& rhs,
-		std::index_sequence<Idx...>)
+	template<typename CharT, std::size_t LeftSize, std::size_t RightSize,
+		std::size_t... LeftIdx, std::size_t... RightIdx>
+		constexpr std::array<CharT, LeftSize - 1 + RightSize> concat_impl(const std::array<CharT, LeftSize>& lhs,
+			const std::array<CharT, RightSize>& rhs, std::index_sequence<LeftIdx...>, std::index_sequence<RightIdx...>)
 	{
-		return ((lhs[Idx] == rhs[Idx]) && ...);
+		return std::array<CharT, LeftSize - 1 + RightSize>{ lhs[LeftIdx]..., rhs[RightIdx]... };
 	}
 
 	template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
-	constexpr bool are_equal(const std::array<CharT, LeftSize>& lhs, const std::array<CharT, RightSize>& rhs)
+	constexpr std::array<CharT, LeftSize - 1 + RightSize> concat(const std::array<CharT, LeftSize>& lhs,
+		const std::array<CharT, RightSize>& rhs)
 	{
-		constexpr std::size_t min_size = std::min(LeftSize, RightSize);
-		return are_equal_impl(lhs, rhs, std::make_index_sequence<min_size - 1>());
+		return concat_impl<CharT>(lhs, rhs, std::make_index_sequence<LeftSize - 1>(),
+			std::make_index_sequence<RightSize>());
 	}
 }

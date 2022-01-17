@@ -70,4 +70,13 @@ namespace cts
 	template<typename CharT, std::size_t Size>
 	constexpr basic_static_string<CharT, Size>::operator const CharT* () const
 	{ return m_buffer.data(); }
+
+	template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
+	constexpr basic_static_string<CharT, LeftSize - 1 + RightSize> operator+(
+		const basic_static_string<CharT, LeftSize>& lhs, const basic_static_string<CharT, RightSize>& rhs)
+	{
+		return basic_static_string<CharT, LeftSize - 1 + RightSize>{
+			_helper::concat<CharT, LeftSize, RightSize>(lhs.m_buffer, rhs.m_buffer)
+		};
+	}
 }
