@@ -16,40 +16,42 @@ namespace cts::_helper
 		return std_array_elems_impl(arr);
 	}
 
-	template<std::size_t Size, std::size_t N, std::size_t... Idx>
-	constexpr std::array<char, Size> to_std_array_impl(const char(&arr)[N], std::index_sequence<Idx...>)
+	template<typename CharT, std::size_t Size, std::size_t N, std::size_t... Idx>
+	constexpr std::array<CharT, Size> to_std_array_impl(const CharT(&arr)[N], std::index_sequence<Idx...>)
 	{
-		return std::array<char, Size>{ arr[Idx]... };
+		return std::array<CharT, Size>{ arr[Idx]... };
 	}
 
-	template<std::size_t Size, std::size_t N>
-	constexpr std::array<char, Size> to_std_array(const char(&arr)[N])
+	template<typename CharT, std::size_t Size, std::size_t N>
+	constexpr std::array<CharT, Size> to_std_array(const CharT(&arr)[N])
 	{
-		return to_std_array_impl<Size>(arr, std::make_index_sequence<Size - 1>());
+		return to_std_array_impl<CharT, Size>(arr, std::make_index_sequence<Size - 1>());
 	}
 
-	template<std::size_t NewSize, std::size_t OldSize, std::size_t... Idx>
-	constexpr std::array<char, NewSize> resize_impl(const std::array<char, OldSize>& arr, std::index_sequence<Idx...>)
+	template<typename CharT, std::size_t NewSize, std::size_t OldSize, std::size_t... Idx>
+	constexpr std::array<CharT, NewSize> resize_impl(const std::array<CharT, OldSize>& arr,
+		std::index_sequence<Idx...>)
 	{
-		return std::array<char, NewSize>{ arr[Idx]... };
+		return std::array<CharT, NewSize>{ arr[Idx]... };
 	}
 
-	template<std::size_t NewSize, std::size_t OldSize>
-	constexpr std::array<char, NewSize> resize(const std::array<char, OldSize>& arr)
+	template<typename CharT, std::size_t NewSize, std::size_t OldSize>
+	constexpr std::array<CharT, NewSize> resize(const std::array<CharT, OldSize>& arr)
 	{
-		return resize_impl<NewSize>(arr, std::make_index_sequence<NewSize - 1>());
+		return resize_impl<CharT, NewSize>(arr, std::make_index_sequence<NewSize - 1>());
 	}
 
-	template<std::size_t Size, std::size_t... Idx>
-	constexpr bool are_equal_impl(std::array<char, Size> lhs, std::array<char, Size> rhs,
+	template<typename CharT, std::size_t LeftSize, std::size_t RightSize, std::size_t... Idx>
+	constexpr bool are_equal_impl(const std::array<CharT, LeftSize>& lhs, const std::array<CharT, RightSize>& rhs,
 		std::index_sequence<Idx...>)
 	{
 		return ((lhs[Idx] == rhs[Idx]) && ...);
 	}
 
-	template<std::size_t Size>
-	constexpr bool are_equal(std::array<char, Size> lhs, std::array<char, Size> rhs)
+	template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
+	constexpr bool are_equal(const std::array<CharT, LeftSize>& lhs, const std::array<CharT, RightSize>& rhs)
 	{
-		return are_equal_impl(lhs, rhs, std::make_index_sequence<Size - 1>());
+		constexpr std::size_t min_size = std::min(LeftSize, RightSize);
+		return are_equal_impl(lhs, rhs, std::make_index_sequence<min_size - 1>());
 	}
 }

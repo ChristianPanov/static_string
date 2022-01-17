@@ -5,86 +5,87 @@
 
 namespace cts
 {
-	template<std::size_t Size>
+	template<typename CharT, std::size_t Size>
 	template<std::size_t N>
-	constexpr basic_static_string<Size>::basic_static_string(const char(&arr)[N])
+	constexpr basic_static_string<CharT, Size>::basic_static_string(const CharT(&arr)[N])
 		: m_elems{ N - 1 > Size ? Size : N - 1 }
-		, m_buffer{ _helper::to_std_array<Size + 1>(arr) }
+		, m_buffer{ _helper::to_std_array<CharT, Size + 1>(arr) }
 	{}
 
-	template<std::size_t Size>
+	template<typename CharT, std::size_t Size>
 	template<std::size_t N>
-	constexpr basic_static_string<Size>::basic_static_string(const std::array<char, N>& arr)
-		: m_elems{ _helper::std_array_elems(_helper::resize<Size + 1>(arr)) }
-		, m_buffer{ _helper::resize<Size + 1>(arr) }
+	constexpr basic_static_string<CharT, Size>::basic_static_string(const std::array<CharT, N>& arr)
+		: m_elems{ _helper::std_array_elems<CharT>(_helper::resize<CharT, Size + 1>(arr)) }
+		, m_buffer{ _helper::resize<CharT, Size + 1>(arr) }
 	{}
 
-	template<std::size_t Size>
+	template<typename CharT, std::size_t Size>
 	template<std::size_t N>
-	constexpr basic_static_string<Size>::basic_static_string(const basic_static_string<N>& other)
-		: basic_static_string<Size>(other.m_buffer)
+	constexpr basic_static_string<CharT, Size>::basic_static_string(const basic_static_string<CharT, N>& other)
+		: basic_static_string<CharT, Size>(other.m_buffer)
 	{}
 
-	template<std::size_t Size>
-	constexpr bool basic_static_string<Size>::empty() const
+	template<typename CharT, std::size_t Size>
+	constexpr bool basic_static_string<CharT, Size>::empty() const
 	{
 		return m_elems == 0;
 	}
 
-	template<std::size_t Size>
-	constexpr std::size_t basic_static_string<Size>::size() const
+	template<typename CharT, std::size_t Size>
+	constexpr std::size_t basic_static_string<CharT, Size>::size() const
 	{
 		return m_elems;
 	}
 
-	template<std::size_t Size>
-	constexpr std::size_t basic_static_string<Size>::length() const
+	template<typename CharT, std::size_t Size>
+	constexpr std::size_t basic_static_string<CharT, Size>::length() const
 	{
 		return m_elems;
 	}
 
-	template<std::size_t Size>
-	constexpr std::array<char, Size + 1> basic_static_string<Size>::data() const
+	template<typename CharT, std::size_t Size>
+	constexpr std::array<CharT, Size + 1> basic_static_string<CharT, Size>::data() const
 	{
 		return m_buffer;
 	}
 
-	template<std::size_t Size>
-	constexpr char& basic_static_string<Size>::operator[](std::size_t index)
+	template<typename CharT, std::size_t Size>
+	constexpr CharT& basic_static_string<CharT, Size>::operator[](std::size_t index)
 	{
 		return m_buffer[index];
 	}
 
-	template<std::size_t Size>
-	constexpr const char& basic_static_string<Size>::operator[](std::size_t index) const
+	template<typename CharT, std::size_t Size>
+	constexpr const CharT& basic_static_string<CharT, Size>::operator[](std::size_t index) const
 	{
 		return m_buffer[index];
 	}
 
-	template<std::size_t Size>
+	template<typename CharT, std::size_t Size>
 	template<std::size_t N>
-	constexpr basic_static_string<Size>& basic_static_string<Size>::operator=(const basic_static_string<N>& other)
+	constexpr basic_static_string<CharT, Size>& basic_static_string<CharT, Size>::operator=(
+		const basic_static_string<CharT, N>& other)
 	{
-		m_buffer = _helper::resize<Size>(other.m_buffer);
+		m_buffer = _helper::resize<CharT, Size>(other.m_buffer);
 		m_elems = other.m_elems;
 	}
 
-	template<std::size_t Size>
+	template<typename CharT, std::size_t Size>
 	template<std::size_t N>
-	constexpr bool basic_static_string<Size>::operator==(const basic_static_string<N>& other) const
+	constexpr bool basic_static_string<CharT, Size>::operator==(const basic_static_string<CharT, N>& other) const
 	{
-		return _helper::are_equal(m_buffer, other.m_buffer);
+		return _helper::are_equal<CharT>(m_buffer, other.m_buffer);
 	}
 
-	template<std::size_t Size>
+	template<typename CharT, std::size_t Size>
 	template<std::size_t N>
-	constexpr bool basic_static_string<Size>::operator!=(const basic_static_string<N>& other) const
+	constexpr bool basic_static_string<CharT, Size>::operator!=(const basic_static_string<CharT, N>& other) const
 	{
 		return !_helper::are_equal<CharT>(m_buffer, other.m_buffer);
 	}
 
-	template<std::size_t Size>
-	constexpr basic_static_string<Size>::operator const char* () const
+	template<typename CharT, std::size_t Size>
+	constexpr basic_static_string<CharT, Size>::operator const CharT* () const
 	{
 		return m_buffer.data();
 	}
