@@ -16,6 +16,13 @@ namespace cts
 		template<std::size_t N>
 		constexpr basic_static_string(const basic_static_string<N>& other);
 
+	public:
+		constexpr bool empty() const;
+		constexpr std::size_t size() const;
+		constexpr std::size_t length() const;
+		constexpr std::array<char, Size + 1> data() const;
+
+
 	private:
 		std::size_t m_elems{};
 		std::array<char, Size + 1> m_buffer{};

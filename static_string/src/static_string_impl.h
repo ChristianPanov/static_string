@@ -24,4 +24,28 @@ namespace cts
 	constexpr basic_static_string<Size>::basic_static_string(const basic_static_string<N>& other)
 		: basic_static_string<Size>(other.m_buffer)
 	{}
+
+	template<std::size_t Size>
+	constexpr bool basic_static_string<Size>::empty() const
+	{
+		return m_elems == 0;
+	}
+
+	template<std::size_t Size>
+	constexpr std::size_t basic_static_string<Size>::size() const
+	{
+		return m_elems;
+	}
+
+	template<std::size_t Size>
+	constexpr std::size_t basic_static_string<Size>::length() const
+	{
+		return m_elems;
+	}
+
+	template<std::size_t Size>
+	constexpr std::array<char, Size + 1> basic_static_string<Size>::data() const
+	{
+		return m_buffer;
+	}
 }
