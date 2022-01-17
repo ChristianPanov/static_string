@@ -60,4 +60,10 @@ namespace cts
 	{
 		return m_buffer[index];
 	}
+
+	template<std::size_t Size>
+	constexpr basic_static_string<Size>::operator const char* () const
+	{
+		return m_buffer.data();
+	}
 }

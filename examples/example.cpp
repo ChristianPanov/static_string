@@ -14,5 +14,7 @@ int main()
 	static_assert(str.size() == 5);
 	static_assert(str[2] == 'l');
 
+	std::cout << str << '\n';
+
 	return 0;
 }

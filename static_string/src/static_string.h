@@ -26,6 +26,8 @@ namespace cts
 		constexpr char& operator[](std::size_t index);
 		constexpr const char& operator[](std::size_t index) const;
 
+	public:
+		constexpr operator const char* () const;
 
 	private:
 		std::size_t m_elems{};
