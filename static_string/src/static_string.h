@@ -28,6 +28,8 @@ namespace cts
 
 	public:
 		template<std::size_t N>
+		constexpr basic_static_string<Size>& operator=(const basic_static_string<N>& other);
+		template<std::size_t N>
 		constexpr bool operator==(const basic_static_string<N>& other) const;
 		template<std::size_t N>
 		constexpr bool operator!=(const basic_static_string<N>& other) const;

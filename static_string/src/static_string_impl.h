@@ -63,6 +63,14 @@ namespace cts
 
 	template<std::size_t Size>
 	template<std::size_t N>
+	constexpr basic_static_string<Size>& basic_static_string<Size>::operator=(const basic_static_string<N>& other)
+	{
+		m_buffer = _helper::resize<Size>(other.m_buffer);
+		m_elems = other.m_elems;
+	}
+
+	template<std::size_t Size>
+	template<std::size_t N>
 	constexpr bool basic_static_string<Size>::operator==(const basic_static_string<N>& other) const
 	{
 		return _helper::are_equal(m_buffer, other.m_buffer);
