@@ -39,4 +39,17 @@ namespace cts::_helper
 	{
 		return resize_impl<NewSize>(arr, std::make_index_sequence<NewSize - 1>());
 	}
+
+	template<std::size_t Size, std::size_t... Idx>
+	constexpr bool are_equal_impl(std::array<char, Size> lhs, std::array<char, Size> rhs,
+		std::index_sequence<Idx...>)
+	{
+		return ((lhs[Idx] == rhs[Idx]) && ...);
+	}
+
+	template<std::size_t Size>
+	constexpr bool are_equal(std::array<char, Size> lhs, std::array<char, Size> rhs)
+	{
+		return are_equal_impl(lhs, rhs, std::make_index_sequence<Size - 1>());
+	}
 }

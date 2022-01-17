@@ -13,6 +13,7 @@ int main()
 	static_assert(!str.empty());
 	static_assert(str.size() == 5);
 	static_assert(str[2] == 'l');
+	static_assert(str2 == str3);
 
 	std::cout << str << '\n';
 

@@ -27,6 +27,10 @@ namespace cts
 		constexpr const char& operator[](std::size_t index) const;
 
 	public:
+		template<std::size_t N>
+		constexpr bool operator==(const basic_static_string<N>& other) const;
+		template<std::size_t N>
+		constexpr bool operator!=(const basic_static_string<N>& other) const;
 		constexpr operator const char* () const;
 
 	private:
