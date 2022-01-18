@@ -33,6 +33,8 @@ namespace cts
 	public:
 		constexpr CharT& operator[](std::size_t index);
 		constexpr const CharT& operator[](std::size_t index) const;
+		constexpr const CharT& front() const;
+		constexpr const CharT& back() const;
 
 	public:
 		template<std::size_t OtherSize>

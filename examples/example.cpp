@@ -26,9 +26,10 @@ int main()
 	static_assert(str[2] == 'l');
 	static_assert(str != str2);
 	static_assert(str4 == cts::basic_static_string("Hello World!"));
+	static_assert(str5.back() == 'o');
 
 	std::cout << str5.size() << '\n';
-	std::cout << str5 << '\n';
+	std::cout << str5.back() << '\n';
 
 	return 0;
 }
