@@ -40,6 +40,14 @@ namespace cts
 	{ return m_buffer; }
 
 	template<typename CharT, std::size_t Size>
+	constexpr basic_static_string<CharT, Size> basic_static_string<CharT, Size>::reverse() const
+	{
+		return basic_static_string<CharT, Size>{ 
+			_helper::array_factory<CharT, Size>::request<_helper::seq::make_reversed_index_sequence>(m_buffer)
+		};
+	}
+
+	template<typename CharT, std::size_t Size>
 	constexpr CharT& basic_static_string<CharT, Size>::operator[](std::size_t index)
 	{ return m_buffer[index]; }
 

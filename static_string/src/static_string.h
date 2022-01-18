@@ -22,6 +22,7 @@ namespace cts
 		constexpr std::size_t size() const;
 		constexpr std::size_t length() const;
 		constexpr std::array<CharT, Size> data() const;
+		constexpr basic_static_string<CharT, Size> reverse() const;
 
 	public:
 		constexpr CharT& operator[](std::size_t index);

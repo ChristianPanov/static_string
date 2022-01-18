@@ -11,6 +11,7 @@ int main()
 	constexpr cts::basic_static_string str = "Hello";
 	constexpr cts::basic_static_string str2 = " World!";
 	constexpr auto str4 = str + str2;
+	constexpr auto str5 = str.reverse();
 
 	static_assert(!str.empty());
 	static_assert(str.size() == 5);
@@ -18,8 +19,8 @@ int main()
 	static_assert(str != str2);
 	static_assert(str4 == cts::basic_static_string("Hello World!"));
 
-	std::cout << str4.size() << '\n';
-	std::cout << str4 << '\n';
+	std::cout << str5.size() << '\n';
+	std::cout << str5 << '\n';
 
 	return 0;
 }
