@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <array>
 
 namespace cts
@@ -7,6 +8,9 @@ namespace cts
 	template<typename CharT, std::size_t Size>
 	class basic_static_string
 	{
+		template<typename CharT, std::size_t Size>
+		friend class basic_static_string;
+
 	public:
 		constexpr basic_static_string() = default;
 		constexpr basic_static_string(const CharT(&arr)[Size]);
@@ -24,8 +28,6 @@ namespace cts
 		constexpr const CharT& operator[](std::size_t index) const;
 
 	public:
-		template<std::size_t OtherSize>
-		constexpr basic_static_string<CharT, Size>& operator=(const basic_static_string<CharT, OtherSize>& other);
 		template<std::size_t OtherSize>
 		constexpr bool operator==(const basic_static_string<CharT, OtherSize>& other) const;
 		template<std::size_t OtherSize>

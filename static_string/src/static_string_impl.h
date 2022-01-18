@@ -1,14 +1,15 @@
 #pragma once
 
 #include "static_string.h"
-#include "static_string_helper.h"
+#include "detail/array_factory.h"
+#include "detail/static_string_helper.h"
 
 namespace cts
 {
 	template<typename CharT, std::size_t Size>
 	constexpr basic_static_string<CharT, Size>::basic_static_string(const CharT(&arr)[Size])
 		: m_elems{ Size - 1 }
-		, m_buffer{ _helper::to_std_array<CharT, Size>(arr) }
+		, m_buffer{ _helper::array_factory<CharT, Size>::request(arr) }
 	{}
 
 	template<typename CharT, std::size_t Size>
@@ -47,15 +48,6 @@ namespace cts
 	{ return m_buffer[index]; }
 
 	template<typename CharT, std::size_t Size>
-	template<std::size_t N>
-	constexpr basic_static_string<CharT, Size>& basic_static_string<CharT, Size>::operator=(
-		const basic_static_string<CharT, N>& other)
-	{
-		m_buffer = _helper::resize<CharT, Size>(other.m_buffer);
-		m_elems = other.m_elems;
-	}
-
-	template<typename CharT, std::size_t Size>
 	template<std::size_t OtherSize>
 	constexpr bool basic_static_string<CharT, Size>::operator==(
 		const basic_static_string<CharT, OtherSize>& other) const
@@ -76,7 +68,7 @@ namespace cts
 		const basic_static_string<CharT, LeftSize>& lhs, const basic_static_string<CharT, RightSize>& rhs)
 	{
 		return basic_static_string<CharT, LeftSize - 1 + RightSize>{
-			_helper::concat<CharT, LeftSize, RightSize>(lhs.m_buffer, rhs.m_buffer)
+			_helper::array_factory<CharT, LeftSize - 1 + RightSize>::request(lhs.m_buffer, rhs.m_buffer)
 		};
 	}
 }
