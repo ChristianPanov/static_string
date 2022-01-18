@@ -24,6 +24,34 @@ namespace cts
 	{}
 
 	template<typename CharT, std::size_t Size>
+	constexpr basic_static_string<CharT, Size> basic_static_string<CharT, Size>::reverse() const
+	{
+		return basic_static_string<CharT, Size>{
+			_helper::array_factory<CharT, Size>::request<_helper::seq::make_reversed_index_sequence>(m_buffer)
+		};
+	}
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t Begin, std::size_t End>
+	constexpr basic_static_string<CharT, End - Begin + 2> basic_static_string<CharT, Size>::substr() const
+	{
+		return basic_static_string<CharT, End - Begin + 2>{
+			_helper::array_factory<CharT, End - Begin + 2>::request<Begin, End, 
+				_helper::seq::make_index_subsequence>(m_buffer)
+		};
+	}
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t Begin, std::size_t End>
+	constexpr basic_static_string<CharT, End - Begin + 2> basic_static_string<CharT, Size>::rsubstr() const
+	{
+		return basic_static_string<CharT, End - Begin + 2>{
+			_helper::array_factory<CharT, End - Begin + 2>::request<Begin, End,
+				_helper::seq::make_reversed_index_subsequence>(m_buffer)
+		};
+	}
+
+	template<typename CharT, std::size_t Size>
 	constexpr bool basic_static_string<CharT, Size>::empty() const
 	{ return m_elems == 0; }
 
@@ -38,14 +66,6 @@ namespace cts
 	template<typename CharT, std::size_t Size>
 	constexpr std::array<CharT, Size> basic_static_string<CharT, Size>::data() const
 	{ return m_buffer; }
-
-	template<typename CharT, std::size_t Size>
-	constexpr basic_static_string<CharT, Size> basic_static_string<CharT, Size>::reverse() const
-	{
-		return basic_static_string<CharT, Size>{ 
-			_helper::array_factory<CharT, Size>::request<_helper::seq::make_reversed_index_sequence>(m_buffer)
-		};
-	}
 
 	template<typename CharT, std::size_t Size>
 	constexpr CharT& basic_static_string<CharT, Size>::operator[](std::size_t index)

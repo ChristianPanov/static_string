@@ -18,11 +18,17 @@ namespace cts
 		constexpr basic_static_string(const basic_static_string<CharT, Size>& other);
 
 	public:
+		constexpr basic_static_string<CharT, Size> reverse() const;
+		template<std::size_t Begin, std::size_t End>
+		constexpr basic_static_string<CharT, End - Begin + 2> substr() const;
+		template<std::size_t Begin, std::size_t End>
+		constexpr basic_static_string<CharT, End - Begin + 2> rsubstr() const;
+
+	public:
 		constexpr bool empty() const;
 		constexpr std::size_t size() const;
 		constexpr std::size_t length() const;
 		constexpr std::array<CharT, Size> data() const;
-		constexpr basic_static_string<CharT, Size> reverse() const;
 
 	public:
 		constexpr CharT& operator[](std::size_t index);
