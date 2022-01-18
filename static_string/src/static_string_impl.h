@@ -77,6 +77,26 @@ namespace cts
 
 	template<typename CharT, std::size_t Size>
 	template<std::size_t OtherSize>
+	constexpr bool cts::basic_static_string<CharT, Size>::operator==(const CharT(&arr)[OtherSize]) const
+	{ return _helper::are_equal<CharT>(m_buffer, arr); }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool cts::basic_static_string<CharT, Size>::operator!=(const CharT(&arr)[OtherSize]) const
+	{ return !_helper::are_equal<CharT>(m_buffer, arr); }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool cts::basic_static_string<CharT, Size>::operator==(const std::array<CharT, OtherSize>& arr) const
+	{ return _helper::are_equal<CharT>(m_buffer, arr); }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool cts::basic_static_string<CharT, Size>::operator!=(const std::array<CharT, OtherSize>& arr) const
+	{ return !_helper::are_equal<CharT>(m_buffer, arr); }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
 	constexpr bool basic_static_string<CharT, Size>::operator==(
 		const basic_static_string<CharT, OtherSize>& other) const
 	{ return _helper::are_equal<CharT>(m_buffer, other.m_buffer); }

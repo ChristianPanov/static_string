@@ -32,4 +32,18 @@ namespace cts::_helper
 		constexpr std::size_t min_size = std::min(LeftSize, RightSize);
 		return are_equal(lhs, rhs, seq::make_index_sequence<min_size - 1>());
 	}
+
+	template<typename CharT, std::size_t LeftSize, std::size_t RightSize, std::size_t... Idx>
+	constexpr bool are_equal(const std::array<CharT, LeftSize>& lhs, const CharT(&rhs)[RightSize],
+		seq::index_sequence<Idx...>)
+	{
+		return ((lhs[Idx] == rhs[Idx]) && ...);
+	}
+
+	template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
+	constexpr bool are_equal(const std::array<CharT, LeftSize>& lhs, const CharT(&rhs)[RightSize])
+	{
+		constexpr std::size_t min_size = std::min(LeftSize, RightSize);
+		return are_equal(lhs, rhs, seq::make_index_sequence<min_size - 1>());
+	}
 }

@@ -36,6 +36,14 @@ namespace cts
 
 	public:
 		template<std::size_t OtherSize>
+		constexpr bool operator==(const CharT(&arr)[OtherSize]) const;
+		template<std::size_t OtherSize>
+		constexpr bool operator!=(const CharT(&arr)[OtherSize]) const;
+		template<std::size_t OtherSize>
+		constexpr bool operator==(const std::array<CharT, OtherSize>& arr) const;
+		template<std::size_t OtherSize>
+		constexpr bool operator!=(const std::array<CharT, OtherSize>& arr) const;
+		template<std::size_t OtherSize>
 		constexpr bool operator==(const basic_static_string<CharT, OtherSize>& other) const;
 		template<std::size_t OtherSize>
 		constexpr bool operator!=(const basic_static_string<CharT, OtherSize>& other) const;
