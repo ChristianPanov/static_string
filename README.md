@@ -1,4 +1,4 @@
-Compile-time string manipulation C++17 library
+Experimental compile-time string manipulation C++17 library
 # Install
 ```
 git clone --recursive https://github.com/ChristianPanov/static_string
