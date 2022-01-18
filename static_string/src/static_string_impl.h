@@ -76,14 +76,6 @@ namespace cts
 	{ return m_buffer[index]; }
 
 	template<typename CharT, std::size_t Size>
-	constexpr const CharT& cts::basic_static_string<CharT, Size>::front() const
-	{ return m_buffer[0]; }
-
-	template<typename CharT, std::size_t Size>
-	constexpr const CharT& basic_static_string<CharT, Size>::back() const
-	{ return m_buffer[m_elems - 1]; }
-
-	template<typename CharT, std::size_t Size>
 	template<std::size_t OtherSize>
 	constexpr bool basic_static_string<CharT, Size>::operator==(
 		const basic_static_string<CharT, OtherSize>& other) const
