@@ -5,7 +5,6 @@ git clone --recursive https://github.com/ChristianPanov/static_string
 ```
 # Features
 - Written in modern C++17
-- constexpr constructors and basic string functions
-- constexpr substring function
-- constexpr iterators
+- Completely compile-time
+- std::string-like interface
 # Usage
