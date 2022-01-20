@@ -26,9 +26,17 @@ namespace cts
 		template<std::size_t Offset = 0, std::size_t OtherSize>
 		constexpr std::size_t find(const CharT(&arr)[OtherSize]) const;
 		template<std::size_t Offset = 0, std::size_t OtherSize>
-		constexpr std::size_t find(const std::array<CharT, Size>& arr) const;
+		constexpr std::size_t find(const std::array<CharT, OtherSize>& arr) const;
 		template<std::size_t Offset = 0, std::size_t OtherSize>
 		constexpr std::size_t find(const basic_static_string<CharT, OtherSize>& other) const;
+		template<std::size_t Offset = 0>
+		constexpr std::size_t rfind(CharT ch) const;
+		template<std::size_t Offset = 0, std::size_t OtherSize>
+		constexpr std::size_t rfind(const CharT(&arr)[OtherSize]) const;
+		template<std::size_t Offset = 0, std::size_t OtherSize>
+		constexpr std::size_t rfind(const std::array<CharT, OtherSize>& arr) const;
+		template<std::size_t Offset = 0, std::size_t OtherSize>
+		constexpr std::size_t rfind(const basic_static_string<CharT, OtherSize>& other) const;
 
 	public:
 		constexpr basic_static_string<CharT, Size> reverse() const;

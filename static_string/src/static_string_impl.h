@@ -35,7 +35,7 @@ namespace cts
 
 	template<typename CharT, std::size_t Size>
 	template<std::size_t Offset, std::size_t OtherSize>
-	constexpr std::size_t basic_static_string<CharT, Size>::find(const std::array<CharT, Size>& arr) const
+	constexpr std::size_t basic_static_string<CharT, Size>::find(const std::array<CharT, OtherSize>& arr) const
 	{ return _helper::find<Offset>(m_buffer, arr); }
 
 	template<typename CharT, std::size_t Size>
@@ -43,6 +43,27 @@ namespace cts
 	constexpr std::size_t basic_static_string<CharT, Size>::find(
 		const basic_static_string<CharT, OtherSize>& other) const
 	{ return _helper::find<Offset>(m_buffer, other.m_buffer); }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t Offset>
+	constexpr std::size_t basic_static_string<CharT, Size>::rfind(CharT ch) const
+	{ return _helper::rfind<Offset>(m_buffer, ch); }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t Offset, std::size_t OtherSize>
+	constexpr std::size_t basic_static_string<CharT, Size>::rfind(const CharT(&arr)[OtherSize]) const
+	{ return _helper::rfind<Offset>(m_buffer, _helper::array_factory<CharT, OtherSize>::request(arr)); }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t Offset, std::size_t OtherSize>
+	constexpr std::size_t basic_static_string<CharT, Size>::rfind(const std::array<CharT, OtherSize>& arr) const
+	{ return _helper::rfind<Offset>(m_buffer, arr); }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t Offset, std::size_t OtherSize>
+	constexpr std::size_t basic_static_string<CharT, Size>::rfind(
+		const basic_static_string<CharT, OtherSize>& other) const
+	{ return _helper::rfind<Offset>(m_buffer, other.m_buffer); }
 
 	template<typename CharT, std::size_t Size>
 	constexpr basic_static_string<CharT, Size> basic_static_string<CharT, Size>::reverse() const

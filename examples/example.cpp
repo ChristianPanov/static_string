@@ -10,8 +10,7 @@ static void print_sequence(cts::_helper::seq::index_sequence<Idx...>)
 
 int main()
 {
-	constexpr std::array<char, 23> arr2 = { "here Hello here World!" };
-	constexpr std::array<char, 5> needle = { "here" };
+	constexpr std::array<char, 28> arr2 = { "Heyy here Hello here World!" };
 	constexpr auto arr = cts::_helper::array_factory<char, 5>::request<1, 4>(arr2);
 	//constexpr auto con = cts::_helper::array_factory<char, 13>::request(arr, arr2);
 
@@ -28,12 +27,14 @@ int main()
 	static_assert(str != str2);
 	static_assert(str4 == "Hello World!");
 
-	constexpr cts::basic_static_string str6 = "here Hello here World!";
+	constexpr cts::basic_static_string str6 = "Heyy here Hello here World!";
+	constexpr cts::basic_static_string needle = "here";
 
-	std::cout << "Found at: " << str6.find<str6.find("Hello")>("here") << "\n";
+	std::cout << "Found " << "'" << needle << "'" << " at: " << str6.rfind<0>(needle) << "\n";
+	//cts::_helper::rfind<9>(arr2, needle);
 
-	//std::cout << str5.size() << '\n';
-	//std::cout << str5 << '\n';
+	std::cout << str5.size() << '\n';
+	std::cout << str5 << '\n';
 
 	return 0;
 }
