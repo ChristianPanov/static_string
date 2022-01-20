@@ -12,7 +12,7 @@ namespace cts
 		friend class basic_static_string;
 
 	public:
-		using npos = std::numeric_limits<std::size_t>::max();
+		static constexpr std::size_t npos = std::numeric_limits<std::size_t>::max();
 
 	public:
 		constexpr basic_static_string() = default;
