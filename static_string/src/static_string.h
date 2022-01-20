@@ -12,10 +12,23 @@ namespace cts
 		friend class basic_static_string;
 
 	public:
+		using npos = std::numeric_limits<std::size_t>::max();
+
+	public:
 		constexpr basic_static_string() = default;
 		constexpr basic_static_string(const CharT(&arr)[Size]);
 		constexpr basic_static_string(const std::array<CharT, Size>& arr);
 		constexpr basic_static_string(const basic_static_string<CharT, Size>& other);
+
+	public:
+		template<std::size_t Offset = 0>
+		constexpr std::size_t find(CharT ch) const;
+		template<std::size_t Offset = 0, std::size_t OtherSize>
+		constexpr std::size_t find(const CharT(&arr)[OtherSize]) const;
+		template<std::size_t Offset = 0, std::size_t OtherSize>
+		constexpr std::size_t find(const std::array<CharT, Size>& arr) const;
+		template<std::size_t Offset = 0, std::size_t OtherSize>
+		constexpr std::size_t find(const basic_static_string<CharT, OtherSize>& other) const;
 
 	public:
 		constexpr basic_static_string<CharT, Size> reverse() const;
