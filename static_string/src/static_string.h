@@ -38,6 +38,13 @@ namespace cts
 		template<std::size_t Offset = 0, std::size_t OtherSize>
 		constexpr std::size_t rfind(const basic_static_string<CharT, OtherSize>& other) const;
 
+		template<std::size_t OtherSize>
+		constexpr bool contains(const CharT(&arr)[OtherSize]) const;
+		template<std::size_t OtherSize>
+		constexpr bool contains(const std::array<CharT, OtherSize>& arr) const;
+		template<std::size_t OtherSize>
+		constexpr bool contains(const basic_static_string<CharT, OtherSize>& other) const;
+
 	public:
 		constexpr basic_static_string<CharT, Size> reverse() const;
 		template<std::size_t Begin, std::size_t End>

@@ -33,6 +33,9 @@ int main()
 	std::cout << "Found " << "'" << needle << "'" << " at: " << str6.rfind<0>(needle) << "\n";
 	//cts::_helper::rfind<9>(arr2, needle);
 
+	static_assert(str6.contains("Hello"));
+	static_assert(!str6.contains("hello"));
+
 	std::cout << str5.size() << '\n';
 	std::cout << str5 << '\n';
 

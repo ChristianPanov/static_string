@@ -66,6 +66,21 @@ namespace cts
 	{ return _helper::rfind<Offset>(m_buffer, other.m_buffer); }
 
 	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool basic_static_string<CharT, Size>::contains(const CharT(&arr)[OtherSize]) const
+	{ return _helper::find<0>(m_buffer, _helper::array_factory<CharT, OtherSize>::request(arr)) != this->npos; }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool basic_static_string<CharT, Size>::contains(const std::array<CharT, OtherSize>& arr) const
+	{ return _helper::find<0>(m_buffer, arr) != this->npos; }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool basic_static_string<CharT, Size>::contains(const basic_static_string<CharT, OtherSize>& other) const
+	{ return _helper::find<0>(m_buffer, other.m_buffer) != this->npos; }
+
+	template<typename CharT, std::size_t Size>
 	constexpr basic_static_string<CharT, Size> basic_static_string<CharT, Size>::reverse() const
 	{
 		return basic_static_string<CharT, Size>{

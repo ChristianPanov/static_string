@@ -6,8 +6,6 @@
 
 #include "index_sequence.h"
 
-#include <iostream>
-
 namespace cts::_helper
 {
 	template<typename CharT, std::size_t N>
