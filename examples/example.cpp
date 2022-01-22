@@ -16,8 +16,8 @@ int main()
 
 	//print_sequence(cts::_helper::seq::make_index_subsequence<0, 7>{});
 
-	constexpr cts::basic_static_string str = "Hello";
-	constexpr cts::basic_static_string str2 = " World!";
+	constexpr cts::static_string str = "Hello";
+	constexpr cts::static_string str2 = " World!";
 	constexpr auto str4 = str + str2;
 	constexpr auto str5 = str.substr<1, 4>();
 
@@ -27,13 +27,13 @@ int main()
 	static_assert(str != str2);
 	static_assert(str4 == "Hello World!");
 
-	constexpr cts::basic_static_string str6 = "Heyy here Hello here World!";
-	constexpr cts::basic_static_string needle = "here";
+	constexpr cts::static_string str6 = "Heyy here Hello here World!";
+	constexpr cts::static_string needle = "here";
 
 	std::cout << "Found " << "'" << needle << "'" << " at: " << str6.rfind<0>(needle) << "\n";
 	//cts::_helper::rfind<9>(arr2, needle);
 
-	constexpr cts::basic_static_string url = "https://cppreference.com";
+	constexpr cts::static_string url = "https://cppreference.com";
 
 	static_assert(str6.contains("Hello"));
 	static_assert(!str6.contains("hello"));

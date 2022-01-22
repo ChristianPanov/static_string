@@ -6,19 +6,19 @@
 namespace cts
 {
 	template<typename CharT, std::size_t Size>
-	class basic_static_string
+	class static_string
 	{
 		template<typename CharT, std::size_t Size>
-		friend class basic_static_string;
+		friend class static_string;
 
 	public:
 		static constexpr std::size_t npos = std::numeric_limits<std::size_t>::max();
 
 	public:
-		constexpr basic_static_string() = default;
-		constexpr basic_static_string(const CharT(&arr)[Size]);
-		constexpr basic_static_string(const std::array<CharT, Size>& arr);
-		constexpr basic_static_string(const basic_static_string<CharT, Size>& other);
+		constexpr static_string() = default;
+		constexpr static_string(const CharT(&arr)[Size]);
+		constexpr static_string(const std::array<CharT, Size>& arr);
+		constexpr static_string(const static_string<CharT, Size>& other);
 
 	public:
 		template<std::size_t Offset = 0>
@@ -28,7 +28,7 @@ namespace cts
 		template<std::size_t Offset = 0, std::size_t OtherSize>
 		constexpr std::size_t find(const std::array<CharT, OtherSize>& arr) const;
 		template<std::size_t Offset = 0, std::size_t OtherSize>
-		constexpr std::size_t find(const basic_static_string<CharT, OtherSize>& other) const;
+		constexpr std::size_t find(const static_string<CharT, OtherSize>& other) const;
 
 	public:
 		template<std::size_t Offset = 0>
@@ -38,7 +38,7 @@ namespace cts
 		template<std::size_t Offset = 0, std::size_t OtherSize>
 		constexpr std::size_t rfind(const std::array<CharT, OtherSize>& arr) const;
 		template<std::size_t Offset = 0, std::size_t OtherSize>
-		constexpr std::size_t rfind(const basic_static_string<CharT, OtherSize>& other) const;
+		constexpr std::size_t rfind(const static_string<CharT, OtherSize>& other) const;
 
 	public:
 		constexpr bool contains(CharT ch) const;
@@ -47,7 +47,7 @@ namespace cts
 		template<std::size_t OtherSize>
 		constexpr bool contains(const std::array<CharT, OtherSize>& arr) const;
 		template<std::size_t OtherSize>
-		constexpr bool contains(const basic_static_string<CharT, OtherSize>& other) const;
+		constexpr bool contains(const static_string<CharT, OtherSize>& other) const;
 
 	public:
 		constexpr bool starts_with(CharT ch) const;
@@ -56,7 +56,7 @@ namespace cts
 		template<std::size_t OtherSize>
 		constexpr bool starts_with(const std::array<CharT, OtherSize>& arr) const;
 		template<std::size_t OtherSize>
-		constexpr bool starts_with(const basic_static_string<CharT, OtherSize>& other) const;
+		constexpr bool starts_with(const static_string<CharT, OtherSize>& other) const;
 
 	public:
 		constexpr bool ends_with(CharT ch) const;
@@ -65,14 +65,14 @@ namespace cts
 		template<std::size_t OtherSize>
 		constexpr bool ends_with(const std::array<CharT, OtherSize>& arr) const;
 		template<std::size_t OtherSize>
-		constexpr bool ends_with(const basic_static_string<CharT, OtherSize>& other) const;
+		constexpr bool ends_with(const static_string<CharT, OtherSize>& other) const;
 
 	public:
-		constexpr basic_static_string<CharT, Size> reverse() const;
+		constexpr static_string<CharT, Size> reverse() const;
 		template<std::size_t Begin, std::size_t End>
-		constexpr basic_static_string<CharT, End - Begin + 2> substr() const;
+		constexpr static_string<CharT, End - Begin + 2> substr() const;
 		template<std::size_t Begin, std::size_t End>
-		constexpr basic_static_string<CharT, End - Begin + 2> rsubstr() const;
+		constexpr static_string<CharT, End - Begin + 2> rsubstr() const;
 
 	public:
 		constexpr bool empty() const;
@@ -94,15 +94,15 @@ namespace cts
 		template<std::size_t OtherSize>
 		constexpr bool operator!=(const std::array<CharT, OtherSize>& arr) const;
 		template<std::size_t OtherSize>
-		constexpr bool operator==(const basic_static_string<CharT, OtherSize>& other) const;
+		constexpr bool operator==(const static_string<CharT, OtherSize>& other) const;
 		template<std::size_t OtherSize>
-		constexpr bool operator!=(const basic_static_string<CharT, OtherSize>& other) const;
+		constexpr bool operator!=(const static_string<CharT, OtherSize>& other) const;
 		constexpr operator const CharT* () const;
 
 	public:
 		template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
-		friend constexpr basic_static_string<CharT, LeftSize - 1 + RightSize> operator+(
-			const basic_static_string<CharT, LeftSize>& lhs, const basic_static_string<CharT, RightSize>& rhs);
+		friend constexpr static_string<CharT, LeftSize - 1 + RightSize> operator+(
+			const static_string<CharT, LeftSize>& lhs, const static_string<CharT, RightSize>& rhs);
 
 	private:
 		std::size_t m_elems{};
@@ -110,8 +110,8 @@ namespace cts
 	};
 
 	template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
-	constexpr basic_static_string<CharT, LeftSize - 1 + RightSize> operator+(
-		const basic_static_string<CharT, LeftSize>& lhs, const basic_static_string<CharT, RightSize>& rhs);
+	constexpr static_string<CharT, LeftSize - 1 + RightSize> operator+(
+		const static_string<CharT, LeftSize>& lhs, const static_string<CharT, RightSize>& rhs);
 }
 
 #include "static_string_impl.h"
