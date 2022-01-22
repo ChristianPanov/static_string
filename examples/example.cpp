@@ -33,8 +33,14 @@ int main()
 	std::cout << "Found " << "'" << needle << "'" << " at: " << str6.rfind<0>(needle) << "\n";
 	//cts::_helper::rfind<9>(arr2, needle);
 
+	constexpr cts::basic_static_string url = "https://cppreference.com";
+
 	static_assert(str6.contains("Hello"));
 	static_assert(!str6.contains("hello"));
+	static_assert(url.starts_with("https"));
+	static_assert(!url.starts_with("ftp"));
+	static_assert(url.ends_with(".com"));
+	static_assert(!url.ends_with(".org"));
 
 	std::cout << str5.size() << '\n';
 	std::cout << str5 << '\n';

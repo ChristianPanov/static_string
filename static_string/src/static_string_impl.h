@@ -66,6 +66,10 @@ namespace cts
 	{ return _helper::rfind<Offset>(m_buffer, other.m_buffer); }
 
 	template<typename CharT, std::size_t Size>
+	constexpr bool cts::basic_static_string<CharT, Size>::contains(CharT ch) const
+	{ return _helper::find<0>(m_buffer, ch) != this->npos; }
+
+	template<typename CharT, std::size_t Size>
 	template<std::size_t OtherSize>
 	constexpr bool basic_static_string<CharT, Size>::contains(const CharT(&arr)[OtherSize]) const
 	{ return _helper::find<0>(m_buffer, _helper::array_factory<CharT, OtherSize>::request(arr)) != this->npos; }
@@ -79,6 +83,46 @@ namespace cts
 	template<std::size_t OtherSize>
 	constexpr bool basic_static_string<CharT, Size>::contains(const basic_static_string<CharT, OtherSize>& other) const
 	{ return _helper::find<0>(m_buffer, other.m_buffer) != this->npos; }
+
+	template<typename CharT, std::size_t Size>
+	constexpr bool cts::basic_static_string<CharT, Size>::starts_with(CharT ch) const
+	{ return _helper::find<0>(m_buffer, ch) == 0; }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool basic_static_string<CharT, Size>::starts_with(const CharT(&arr)[OtherSize]) const
+	{ return _helper::find<0>(m_buffer, _helper::array_factory<CharT, OtherSize>::request(arr)) == 0; }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool basic_static_string<CharT, Size>::starts_with(const std::array<CharT, OtherSize>& arr) const
+	{ return _helper::find<0>(m_buffer, arr) == 0; }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool basic_static_string<CharT, Size>::starts_with(
+		const basic_static_string<CharT, OtherSize>& other) const
+	{ return _helper::find<0>(m_buffer, other.m_buffer) == 0; }
+
+	template<typename CharT, std::size_t Size>
+	constexpr bool cts::basic_static_string<CharT, Size>::ends_with(CharT ch) const
+	{ return _helper::rfind<0>(m_buffer, ch) == Size - 2; }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool basic_static_string<CharT, Size>::ends_with(const CharT(&arr)[OtherSize]) const
+	{ return _helper::rfind<0>(m_buffer, _helper::array_factory<CharT, OtherSize>::request(arr)) == Size - OtherSize; }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool basic_static_string<CharT, Size>::ends_with(const std::array<CharT, OtherSize>& arr) const
+	{ return _helper::rfind<0>(m_buffer, arr) == Size - OtherSize; }
+
+	template<typename CharT, std::size_t Size>
+	template<std::size_t OtherSize>
+	constexpr bool basic_static_string<CharT, Size>::ends_with(
+		const basic_static_string<CharT, OtherSize>& other) const
+	{ return _helper::rfind<0>(m_buffer, other.m_buffer) == Size - OtherSize; }
 
 	template<typename CharT, std::size_t Size>
 	constexpr basic_static_string<CharT, Size> basic_static_string<CharT, Size>::reverse() const

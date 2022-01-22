@@ -29,6 +29,8 @@ namespace cts
 		constexpr std::size_t find(const std::array<CharT, OtherSize>& arr) const;
 		template<std::size_t Offset = 0, std::size_t OtherSize>
 		constexpr std::size_t find(const basic_static_string<CharT, OtherSize>& other) const;
+
+	public:
 		template<std::size_t Offset = 0>
 		constexpr std::size_t rfind(CharT ch) const;
 		template<std::size_t Offset = 0, std::size_t OtherSize>
@@ -38,12 +40,32 @@ namespace cts
 		template<std::size_t Offset = 0, std::size_t OtherSize>
 		constexpr std::size_t rfind(const basic_static_string<CharT, OtherSize>& other) const;
 
+	public:
+		constexpr bool contains(CharT ch) const;
 		template<std::size_t OtherSize>
 		constexpr bool contains(const CharT(&arr)[OtherSize]) const;
 		template<std::size_t OtherSize>
 		constexpr bool contains(const std::array<CharT, OtherSize>& arr) const;
 		template<std::size_t OtherSize>
 		constexpr bool contains(const basic_static_string<CharT, OtherSize>& other) const;
+
+	public:
+		constexpr bool starts_with(CharT ch) const;
+		template<std::size_t OtherSize>
+		constexpr bool starts_with(const CharT(&arr)[OtherSize]) const;
+		template<std::size_t OtherSize>
+		constexpr bool starts_with(const std::array<CharT, OtherSize>& arr) const;
+		template<std::size_t OtherSize>
+		constexpr bool starts_with(const basic_static_string<CharT, OtherSize>& other) const;
+
+	public:
+		constexpr bool ends_with(CharT ch) const;
+		template<std::size_t OtherSize>
+		constexpr bool ends_with(const CharT(&arr)[OtherSize]) const;
+		template<std::size_t OtherSize>
+		constexpr bool ends_with(const std::array<CharT, OtherSize>& arr) const;
+		template<std::size_t OtherSize>
+		constexpr bool ends_with(const basic_static_string<CharT, OtherSize>& other) const;
 
 	public:
 		constexpr basic_static_string<CharT, Size> reverse() const;
