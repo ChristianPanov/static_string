@@ -75,6 +75,17 @@ namespace cts
 		constexpr static_string<CharT, End - Begin + 2> rsubstr() const;
 
 	public:
+		template<std::size_t Begin, std::size_t End, std::size_t OtherSize>
+		constexpr static_string<CharT, Size - (End - Begin) + OtherSize> replace(
+			const CharT(&arr)[OtherSize]) const;
+		template<std::size_t Begin, std::size_t End, std::size_t OtherSize>
+		constexpr static_string<CharT, Size - (End - Begin) + OtherSize> replace(
+			const std::array<CharT, OtherSize>& arr) const;
+		template<std::size_t Begin, std::size_t End, std::size_t OtherSize>
+		constexpr static_string<CharT, Size - (End - Begin) + OtherSize> replace(
+			const static_string<CharT, OtherSize>& other) const;
+
+	public:
 		constexpr bool empty() const;
 		constexpr std::size_t size() const;
 		constexpr std::size_t length() const;

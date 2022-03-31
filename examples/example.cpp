@@ -33,6 +33,7 @@ int main()
 	std::cout << "Found " << "'" << needle << "'" << " at: " << str6.rfind<0>(needle) << "\n";
 	//cts::_helper::rfind<9>(arr2, needle);
 
+	constexpr cts::static_string str10 = str6.replace<str6.find("Hello"), str6.find("Hello") + 5>("REPLACED");
 	constexpr cts::static_string url = "https://cppreference.com";
 
 	static_assert(str6.contains("Hello"));
@@ -42,8 +43,9 @@ int main()
 	static_assert(url.ends_with(".com"));
 	static_assert(!url.ends_with(".org"));
 
-	std::cout << str5.size() << '\n';
-	std::cout << str5 << '\n';
+
+	std::cout << str10.size() << '\n';
+	std::cout << str10 << '\n';
 
 	return 0;
 }
