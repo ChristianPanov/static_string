@@ -117,7 +117,7 @@ namespace cts
 
 	private:
 		std::size_t m_elems{};
-		std::array<char, Size> m_buffer{};
+		std::array<CharT, Size> m_buffer{};
 	};
 
 	template<typename CharT, std::size_t LeftSize, std::size_t RightSize>
