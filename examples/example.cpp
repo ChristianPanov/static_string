@@ -11,7 +11,7 @@ static void print_sequence(cts::_helper::seq::index_sequence<Idx...>)
 int main()
 {
 	constexpr std::array<char, 28> arr2 = { "Heyy here Hello here World!" };
-	constexpr auto arr = cts::_helper::array_factory<char, 5>::request<1, 4>(arr2);
+	constexpr auto arr = cts::_helper::array_factory<char, 4>::request("Test");
 	//constexpr auto con = cts::_helper::array_factory<char, 13>::request(arr, arr2);
 
 	//print_sequence(cts::_helper::seq::make_index_subsequence<0, 7>{});
@@ -45,7 +45,7 @@ int main()
 
 
 	std::cout << str10.size() << '\n';
-	std::cout << str10 << '\n';
+	std::cout << arr.data() << '\n';
 
 	return 0;
 }
